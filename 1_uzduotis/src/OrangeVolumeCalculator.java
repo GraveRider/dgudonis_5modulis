@@ -70,11 +70,9 @@ public class OrangeVolumeCalculator {
     /**
      * Checks if the given input is valid for computing orange volume.
      *
-     * @param diameter of the given orange.
-     * @param thickness of the given orange.
      * @return false if input is not valid, else true.
      */
-    private static boolean isValidInput(double diameter, double thickness) {
+    private static boolean isValidInput() {
         if (diameter == 0 || diameter == thickness) {
             OrangeVolumeCalculator.diameter = 0;
             OrangeVolumeCalculator.thickness = 0;
@@ -94,7 +92,7 @@ public class OrangeVolumeCalculator {
         System.out.print("Įveskite apelsino žievelės storį: ");
         thickness = input();
 
-        isValidInput(diameter, thickness);
+        isValidInput();
 
         System.out.println(computeOrangeVolume(computeOrangeRadius(diameter, thickness)));
     }
