@@ -74,8 +74,8 @@ public class OrangeVolumeCalculator {
      */
     private static boolean isValidInput() {
         if (diameter == 0 || diameter == thickness) {
-            OrangeVolumeCalculator.diameter = 0;
-            OrangeVolumeCalculator.thickness = 0;
+            diameter = 0;
+            thickness = 0;
 
             return false;
         }
