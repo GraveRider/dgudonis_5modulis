@@ -9,14 +9,6 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class OrangeVolumeCalculator {
-    /**
-     * Stores the diameter of the orange.
-     */
-    private static double diameter;
-    /**
-     * Stores the thickness of the orange.
-     */
-    private static double thickness;
 
     /**
      * Entry point of the program.
@@ -52,10 +44,10 @@ public class OrangeVolumeCalculator {
      * @return radius of the given orange.
      */
     public static double computeOrangeRadius(double diameter, double thickness) {
-       if (isValidInput()) {
+       if (isValidInput(diameter, thickness)) {
            return (diameter - thickness * 2) / 2;
        }
-        return 0;
+       return 0;
     }
 
     /**
@@ -73,11 +65,8 @@ public class OrangeVolumeCalculator {
      *
      * @return false if input is not valid, else true.
      */
-    public static boolean isValidInput() {
+    public static boolean isValidInput(double diameter, double thickness) {
         if (diameter <= 0 || thickness <= 0 || diameter == thickness) {
-            diameter = 0;
-            thickness = 0;
-
             return false;
         }
         return true;
@@ -89,10 +78,10 @@ public class OrangeVolumeCalculator {
     public static void start() {
         Scanner reader = new Scanner(System.in);
         System.out.print("Įveskite apelsino skersmenį: ");
-        diameter = input(reader);
+        double diameter = input(reader);
 
         System.out.print("Įveskite apelsino žievelės storį: ");
-        thickness = input(reader);
+        double thickness = input(reader);
 
         System.out.println(computeOrangeVolume(computeOrangeRadius(diameter, thickness)));
     }

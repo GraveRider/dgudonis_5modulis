@@ -2,9 +2,7 @@ package Testing;
 
 import org.junit.Test;
 import Main.OrangeVolumeCalculator;
-
 import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
 
 public class OrangeVolumeCalculatorTest {
 
@@ -17,7 +15,7 @@ public class OrangeVolumeCalculatorTest {
     @Test
     public void orangeVolumeShouldReturnZeroWithZeroDiameter() {
         assertEquals("With 0 diameter should return 0", 0.0,
-                OrangeVolumeCalculator.computeOrangeVolume(OrangeVolumeCalculator.computeOrangeRadius(0, -5)));
+                OrangeVolumeCalculator.computeOrangeVolume(OrangeVolumeCalculator.computeOrangeRadius(0, -1)));
     }
 
 
