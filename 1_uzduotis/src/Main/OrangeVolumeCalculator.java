@@ -1,3 +1,5 @@
+package Main;
+
 import java.util.Scanner;
 
 /**
@@ -18,6 +20,7 @@ public class OrangeVolumeCalculator {
 
     /**
      * Entry point of the program.
+     *
      * @param args of the String array.
      */
     public static void main(String[] args) {
@@ -29,19 +32,14 @@ public class OrangeVolumeCalculator {
      *
      * @return given input.
      */
-    private static double input() {
-        Scanner reader = new Scanner(System.in);
+    public static double input(Scanner reader) {
         try {
-            double n = Double.parseDouble(reader.nextLine());
-            if (n < 0) {
-                throw new IllegalArgumentException();
-            } else {
-                return n;
-            }
+            return Double.parseDouble(reader.nextLine());
+
         } catch (IllegalArgumentException e) {
             System.out.println("Illegal argument! Argument must be positive and a type of double!");
         }
-        reader.close();
+
         return 0;
     }
 
@@ -53,8 +51,11 @@ public class OrangeVolumeCalculator {
      * @param thickness of the given orange.
      * @return radius of the given orange.
      */
-    private static double computeOrangeRadius(double diameter, double thickness) {
-        return (diameter - thickness * 2) / 2;
+    public static double computeOrangeRadius(double diameter, double thickness) {
+       if (isValidInput()) {
+           return (diameter - thickness * 2) / 2;
+       }
+        return 0;
     }
 
     /**
@@ -63,7 +64,7 @@ public class OrangeVolumeCalculator {
      * @param radius of the given orange.
      * @return volume of the given orange.
      */
-    private static double computeOrangeVolume(double radius) {
+    public static double computeOrangeVolume(double radius) {
         return Math.round(4.0 / 3.0 * Math.PI * Math.pow(radius, 3) * 100) / 100.0;
     }
 
@@ -72,8 +73,8 @@ public class OrangeVolumeCalculator {
      *
      * @return false if input is not valid, else true.
      */
-    private static boolean isValidInput() {
-        if (diameter == 0 || diameter == thickness) {
+    public static boolean isValidInput() {
+        if (diameter <= 0 || thickness <= 0 || diameter == thickness) {
             diameter = 0;
             thickness = 0;
 
@@ -85,14 +86,13 @@ public class OrangeVolumeCalculator {
     /**
      * Starts the program.
      */
-    private static void start() {
+    public static void start() {
+        Scanner reader = new Scanner(System.in);
         System.out.print("Įveskite apelsino skersmenį: ");
-        diameter = input();
+        diameter = input(reader);
 
         System.out.print("Įveskite apelsino žievelės storį: ");
-        thickness = input();
-
-        isValidInput();
+        thickness = input(reader);
 
         System.out.println(computeOrangeVolume(computeOrangeRadius(diameter, thickness)));
     }
