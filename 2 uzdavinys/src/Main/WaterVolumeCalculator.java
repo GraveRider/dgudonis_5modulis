@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.Scanner;
+
 /**
  * Calculates volume of the water in the cube in which circle shape is also present.
  *
@@ -9,11 +11,32 @@ package Main;
 public class WaterVolumeCalculator {
 
     public static void main(String[] args) {
+        Scanner reader = new Scanner(System.in);
+        doubleInput(reader);
+    }
 
-        System.out.println(calculateCubeVolume(4));
-        System.out.println(calculateCircleVolume(4));
-        System.out.println(calculateWaterVolume(64, 33.51));
-
+    /**
+     * Handles the user's input. If input is invalid or negative zero is returned.
+     *
+     * @param reader for entering input.
+     * @return entered user's value or zero.
+     */
+    public static double doubleInput(Scanner reader) {
+        double number = 0;
+        try {
+             number = Double.parseDouble(reader.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Input must be of double type! " + e.getMessage());
+            number = Double.parseDouble(reader.nextLine());
+        }
+        finally {
+            if (number < 0) {
+                reader.close();
+                return 0;
+            }
+            reader.close();
+            return number;
+        }
     }
 
     /**
