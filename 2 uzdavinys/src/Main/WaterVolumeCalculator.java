@@ -11,8 +11,7 @@ import java.util.Scanner;
 public class WaterVolumeCalculator {
 
     public static void main(String[] args) {
-        Scanner reader = new Scanner(System.in);
-        doubleInput(reader);
+        start();
     }
 
     /**
@@ -24,18 +23,16 @@ public class WaterVolumeCalculator {
     public static double doubleInput(Scanner reader) {
         double number = 0;
         try {
-             number = Double.parseDouble(reader.nextLine());
+            number = Double.parseDouble(reader.nextLine());
         } catch (IllegalArgumentException e) {
             System.err.println("Input must be of double type! " + e.getMessage());
             number = Double.parseDouble(reader.nextLine());
-        }
-        finally {
+        } finally {
             if (number < 0) {
-                reader.close();
                 return 0;
+            } else {
+                return number;
             }
-            reader.close();
-            return number;
         }
     }
 
@@ -50,7 +47,6 @@ public class WaterVolumeCalculator {
     }
 
     /**
-     *
      * Calculates volume of the circle by given diameter.
      *
      * @param diameter of the give circle.
@@ -64,11 +60,34 @@ public class WaterVolumeCalculator {
     /**
      * Calculates volume of the water.
      *
-     * @param cubeVolume - volume of the given cube.
+     * @param cubeVolume   - volume of the given cube.
      * @param circleVolume - volume of the given circle.
      * @return volume of the water.
      */
     public static double calculateWaterVolume(double cubeVolume, double circleVolume) {
         return Math.round((cubeVolume - circleVolume) * 100) / 100.0;
+    }
+
+    public static void start() {
+        Scanner reader = new Scanner(System.in);
+
+        System.out.print("Įveskite kubo kraštinės ilgį: ");
+        double cubeSide = doubleInput(reader);
+
+        System.out.print("Įveskite rutulio skersmenį: ");
+        double circleDiameter = doubleInput(reader);
+
+        reader.close();
+
+        if (cubeSide == 0 || cubeSide < circleDiameter) {
+            System.err.println("Wrong parameters!");
+        } else {
+            System.out.println("Kubo tūris: " + calculateCubeVolume(cubeSide));
+            System.out.println("Rutulio tūris: " + calculateCircleVolume(circleDiameter));
+            System.out.println("Vandens tūris: "
+                    + calculateWaterVolume(calculateCubeVolume(cubeSide), calculateCircleVolume(circleDiameter)));
+        }
+
+
     }
 }
